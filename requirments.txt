@@ -1,0 +1,4 @@
+pexpect
+pypi-json
+eth_utils
+web3

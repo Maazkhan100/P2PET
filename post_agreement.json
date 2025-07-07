@@ -1,0 +1,12 @@
+[
+    {
+        "prosumer_name": "abc",
+        "prosumer_offer": 3,
+        "prosumer_capacity": 1,
+        "consumer_name": "cbs",
+        "consumer_bid": 3,
+        "consumer_demand": 2,
+        "price": 3.0,
+        "allocated_energy": 1
+    }
+]

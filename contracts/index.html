@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Energy Trading DApp</title>
+    <script>
+        function updateForm() {
+            const role = document.getElementById("role").value;
+            const formFields = document.getElementById("formFields");
+
+            if (role === "N/A") {
+                formFields.style.display = "none";  // Hide input fields
+            } else {
+                formFields.style.display = "block"; // Show input fields
+                const priceLabel = document.getElementById("priceLabel");
+                const priceInput = document.getElementById("price");
+
+                if (role === "buyer") {
+                    priceLabel.innerText = "Bid Price";
+                    priceInput.placeholder = "Max Bid Price";
+                } else {
+                    priceLabel.innerText = "Offer Price";
+                    priceInput.placeholder = "Your Offer Price";
+                }
+            }
+        }
+
+        async function submitTrade() {
+            const role = document.getElementById("role").value;
+            let energy = document.getElementById("energy").value;
+            let price = document.getElementById("price").value;
+            const sender = document.getElementById("sender").value;
+
+            if (role === "N/A") {
+                energy = 0;
+                price = 0;
+            }
+
+            const response = await fetch("/submit_trade", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ energy, price, sender, role }),
+            });
+
+            const result = await response.json();
+            alert("Transaction Hash: " + result.tx_hash);
+        }
+
+        async function run_algo() {
+            const response = await fetch("/run_algo", { method: "POST" });
+            const result = await response.json();
+            alert(result.message);
+        }
+    </script>
+</head>
+<body>
+    <h1>P2P Energy Trading Web App</h1>
+
+    <label for="role">Role:</label>
+    <select id="role" onchange="updateForm()">
+        <option value="N/A">N/A</option>
+        <option value="buyer">Buyer</option>
+        <option value="seller">Seller</option>
+    </select>
+
+    <div id="formFields" style="display: none;">
+        <label for="energy">Energy (kWh):</label>
+        <input id="energy" type="number" placeholder="Energy (kWh)">
+
+        <label id="priceLabel" for="price">Bid/Offer Price:</label>
+        <input id="price" type="number" placeholder="Enter Price">
+    </div>
+
+    <label for="sender">Ethereum Address:</label>
+    <input id="sender" type="text" placeholder="Ethereum Address">
+
+    <button onclick="submitTrade()">Submit</button>
+
+    <br><br>
+    <button onclick="run_algo()">Run Algorithm</button>
+</body>
+</html>

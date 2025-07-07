@@ -1,0 +1,575 @@
+body{font-family: 'Open Sans', sans-serif; font-size:14px; color:#777; background: url('../images/background.jpg') center / cover no-repeat;}
+
+
+/* Resets */
+input[type='number'] {-moz-appearance:textfield;}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0;}
+
+ul, ol {
+    margin: 0;
+    padding: 0;
+    list-style-position: inside;
+    list-style: none;
+    line-height: 2;
+}
+
+p{line-height:24px;}
+
+
+/* General Classess and Utilities*/
+.clearBoth{ clear:both;}
+a, a:hover, a:focus, a:active{color: #d23232; text-decoration: none;; outline: none;}
+.btn:focus, .btn.focus{background: none; outline: 0; }
+strong{font-weight:700;}
+.text-small{font-size:12px;}
+.text-xs{font-size:10px;}
+.asterix-red{color:#ff0000;}
+.error{ border: 1px solid #f00!important;}
+.popover{border-radius:0;}
+.pointer{cursor:pointer;}
+.padTopNone{ padding-top:0 !important;}
+.form-control[readonly]{ background:transparent;}
+.noborder{border:none !important;}
+.noborderTop{border-top:none !important;}
+.noborderBottom{border-bottom:none !important;}
+.noborderRight{border-right:none !important;}
+
+
+
+
+/* Margins */
+.m5{ margin:5px;}
+.mT5{margin-top:5px;}
+.mTn5{margin-top:-5px;}
+.mR20{margin-right:20px;}
+
+
+/* Paddings */
+.nopadding {padding: 0 !important;}
+.nopaddingRight{padding-right:0 !important;}
+
+
+
+/*Widths*/
+.w33pcnt{width:33%;}
+.w45pcnt{width:45%;}
+.w50pcnt{width:50%;}
+.w60pcnt{width:60%;}
+.w70pcnt{width:70%;}
+.w100pcnt{width:100%;}
+
+
+
+
+
+/*Pre - Loader Styles*/
+#loading{ background: #FFF;bottom: 0; left: 0; position: fixed; right: 0;
+top: 0; z-index: 999999;}
+.loading_img {background:url(../images/loading.gif) no-repeat center center;height: 200px; left: 50%; margin: -100px 0 0 -100px; position: absolute; top: 50%; width: 200px;}
+
+
+
+
+/* back to top */
+#back-top {
+  display:none;	
+  position: fixed;
+    bottom: 10px;
+    right: 20px;
+    z-index: 100;
+    color: #FFF;
+    background: #d23232;
+    padding: 8px 11px;
+    font-size: 24px;
+    width: 46px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+#back-top:hover{
+  opacity: 1;
+  -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.19),0 6px 6px rgba(0,0,0,0.23);
+  -moz-box-shadow: 0 10px 20px rgba(0,0,0,0.19),0 6px 6px rgba(0,0,0,0.23);
+  -o-box-shadow: 0 10px 20px rgba(0,0,0,0.19),0 6px 6px rgba(0,0,0,0.23);
+   box-shadow: 0 10px 20px rgba(0,0,0,0.19),0 6px 6px rgba(0,0,0,0.23);
+  -webkit-transition: 0.2s ease-in-out;
+	-moz-transition: 0.2s ease-in-out;
+	-ms-transition: 0.2s ease-in-out;
+	-o-transition: 0.2s ease-in-out;
+	transition: 0.2s ease-in-out;
+}
+
+
+
+.navbar{
+	background: #FFF;
+	box-shadow: 0px 0px 30px rgba(69, 101, 173, 0.1);
+	padding: 15px 0;
+}
+
+.nav > li {
+    margin: 0 15px;
+}
+.navbar-brand {padding: 8px;}
+.navbar-brand i{font-size: 24px; color: #007025;}
+
+.navbar-brand > img {
+    margin: -15px 0 0 0; 
+}
+
+h2{
+	border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 20px;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 1;
+	color: #000000;
+}
+
+
+h2:after {
+    content: "";
+    background-color: #047bf8;
+    width: 42px;
+    height: 6px;
+    border-radius: 2px;
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    left: 0px;
+}
+
+.card{
+	background: #FFF;
+	border-radius: 6px;
+	padding: 30px;
+	margin: 0 0 30px 0;
+	box-shadow: 0px 0px 30px rgba(69, 101, 173, 0.1);
+	border:1px solid transparent;
+}
+
+
+.card:hover{border:1px solid #047bf8; transition: all 0.3s;}
+
+.card .line{margin: 0 0 15px 0; overflow: hidden; border-bottom: 1px solid #e0e0e0; padding: 0 0 15px 0;}
+.card .line div{float:left; margin: 3px 0 0 0;}
+.card .line span{float:right; width: 130px; text-align: right; white-space: nowrap;overflow: hidden; text-overflow: ellipsis; font-size: 18px; font-weight: 600;}
+.card .stats{margin:0 0 30px 0;}
+.card h3{text-align:center; margin: 0 0 15px 0; padding: 0 0 20px 0; font-size: 42px; border-bottom: 1px solid #e0e0e0; font-weight: 300;}
+
+.btn-primary {
+    color: #fff;
+    background-color: #047bf8;
+    border-color: #047bf8;
+	border-radius: 42px;
+	padding: 8px 15px;
+	font-size: 18px;
+	text-transform: uppercase;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+    color: #fff;
+    background-color: #0362c6;
+    border-color: #035dbc;
+}
+
+
+.btn-success {
+    background-color: #90be2e;
+    border-color: #90be2e;
+	border-radius: 42px;
+	color:#FFFFFF !important;
+	min-width: 120px;
+	text-transform: uppercase;
+	padding: 10px 15px;
+}
+
+.btn-success:hover, .btn-success:active, .btn-success:focus {
+    background-color: #719524 !important;
+    border-color: #6b8d22 !important;
+}
+
+
+.btn-info {
+    background-color: #5bc0de;
+    border-color: #5bc0de;
+	border-radius: 42px;
+	color:#FFFFFF !important;
+	min-width: 120px;
+	text-transform: uppercase;
+	padding: 10px 15px;
+}
+
+.btn-info:hover, .btn-info:active, .btn-info:focus {
+    background-color: #31b0d5!important;
+    border-color: #2aabd2!important;
+}
+
+
+.form-control{height: 50px;}
+.modal-header {color: #000; font-weight: 600;}
+
+
+
+
+.horizontal-spacer {
+    width: 100%;      /* Full width to span the entire line */
+    height: 20px;     /* Adjust the height for how much space you want */
+    margin: 10px 0;   /* Optional: add margin to control space above and below */
+    display: block;   /* Ensure it's treated as a block element */
+}
+
+
+
+@media print {
+    .table, .table__body {
+     overflow: visible;
+     height: auto !important;
+     width: auto !important;
+    }
+   }
+   
+   /*@page {
+       size: landscape;
+       margin: 0; 
+   }*/
+   
+   /* body {
+       min-height: 100vh;
+       background: url(images/html_table.jpg) center / cover;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   }
+    */
+   main.table {
+       width: 82vw;
+       height: auto; /*90vh*/
+       background-color: #fff5;
+   
+       backdrop-filter: blur(7px);
+       box-shadow: 0 .4rem .8rem #0005;
+       border-radius: .8rem;
+   
+       overflow: hidden;
+       margin: 0 auto;
+       padding: 20px;
+   }
+   
+   .table__header {
+       width: 100%;
+       height: 10%;
+       background-color: #fff4;
+       padding: .8rem 1rem;
+   
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+   }
+   
+   .table__header .input-group {
+       width: 35%;
+       height: 100%;
+       background-color: #fff5;
+       padding: 0 .8rem;
+       border-radius: 2rem;
+   
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   
+       transition: .2s;
+   }
+   
+   .table__header .input-group:hover {
+       width: 45%;
+       background-color: #fff8;
+       box-shadow: 0 .1rem .4rem #0002;
+   }
+   
+   .table__header .input-group img {
+       width: 1.2rem;
+       height: 1.2rem;
+   }
+   
+   .table__header .input-group input {
+       width: 100%;
+       padding: 0 .5rem 0 .3rem;
+       background-color: transparent;
+       border: none;
+       outline: none;
+   }
+   
+   .table__body {
+       width: 95%;
+       max-height: calc(89% - 1.6rem);
+       background-color: #fffb;
+   
+       margin: .8rem auto;
+       border-radius: .6rem;
+   
+       overflow: auto;
+       overflow: overlay;
+   }
+   
+   
+   .table__body::-webkit-scrollbar{
+       width: 0.5rem;
+       height: 0.5rem;
+   }
+   
+   .table__body::-webkit-scrollbar-thumb{
+       border-radius: .5rem;
+       background-color: #0004;
+       visibility: hidden;
+   }
+   
+   .table__body:hover::-webkit-scrollbar-thumb{ 
+       visibility: visible;
+   }
+   
+   
+   table {
+       width: 100%;
+   }
+   
+   td img {
+       width: 36px;
+       height: 36px;
+       margin-right: .5rem;
+       border-radius: 50%;
+   
+       vertical-align: middle;
+   }
+   
+   table, th, td {
+       border-collapse: collapse;
+       padding: 1rem;
+       text-align: left;
+   }
+   
+   thead th {
+       position: sticky;
+       top: 0;
+       left: 0;
+       background-color: #d5d1defe;
+       cursor: pointer;
+       text-transform: capitalize;
+   }
+   
+   tbody tr:nth-child(even) {
+       background-color: #0000000b;
+   }
+   
+   tbody tr {
+       --delay: .1s;
+       transition: .5s ease-in-out var(--delay), background-color 0s;
+   }
+   
+   tbody tr.hide {
+       opacity: 0;
+       transform: translateX(100%);
+   }
+   
+   tbody tr:hover {
+       background-color: #fff6 !important;
+   }
+   
+   tbody tr td,
+   tbody tr td p,
+   tbody tr td img {
+       transition: .2s ease-in-out;
+   }
+   
+   tbody tr.hide td,
+   tbody tr.hide td p {
+       padding: 0;
+       font: 0 / 0 sans-serif;
+       transition: .2s ease-in-out .5s;
+   }
+   
+   tbody tr.hide td img {
+       width: 0;
+       height: 0;
+       transition: .2s ease-in-out .5s;
+   }
+   
+   .status {
+       padding: .4rem 0;
+       border-radius: 2rem;
+       text-align: center;
+   }
+   
+   .status.delivered {
+       background-color: #86e49d;
+       color: #006b21;
+   }
+   
+   .status.cancelled {
+       background-color: #d893a3;
+       color: #b30021;
+   }
+   
+   .status.pending {
+       background-color: #ebc474;
+   }
+   
+   .status.shipped {
+       background-color: #6fcaea;
+   }
+   
+   
+   @media (max-width: 1000px) {
+       td:not(:first-of-type) {
+           min-width: 12.1rem;
+       }
+   }
+   
+   thead th span.icon-arrow {
+       display: inline-block;
+       width: 1.3rem;
+       height: 1.3rem;
+       border-radius: 50%;
+       border: 1.4px solid transparent;
+       
+       text-align: center;
+       font-size: 1rem;
+       
+       margin-left: .5rem;
+       transition: .2s ease-in-out;
+   }
+   
+   thead th:hover span.icon-arrow{
+       border: 1.4px solid #6c00bd;
+   }
+   
+   thead th:hover {
+       color: #6c00bd;
+   }
+   
+   thead th.active span.icon-arrow{
+       background-color: #6c00bd;
+       color: #fff;
+   }
+   
+   thead th.asc span.icon-arrow{
+       transform: rotate(180deg);
+   }
+   
+   thead th.active,tbody td.active {
+       color: #6c00bd;
+   }
+   
+   .export__file {
+       position: relative;
+   }
+
+   .import__file {
+    position: relative;
+}
+   .export__file .export__file-btn {
+       display: inline-block;
+       width: 2rem;
+       height: 2rem;
+       background: #fff6 url(../images/export.png) center / 80% no-repeat;
+       border-radius: 50%;
+       transition: .2s ease-in-out;
+   }
+
+   .import__file .import__file-btn {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    background: #fff6 url(../images/import.png) center / 80% no-repeat;
+    border-radius: 50%;
+    transition: .2s ease-in-out;
+}
+
+   .export__file .export__file-btn:hover { 
+       background-color: #fff;
+       transform: scale(1.15);
+       cursor: pointer;
+   }
+
+   .import__file .import__file-btn:hover { 
+    background-color: #fff;
+    transform: scale(1.15);
+    cursor: pointer;
+}
+   .export__file input {
+       display: none;
+   }
+   
+   .export__file .export__file-options {
+       position: absolute;
+       right: 0;
+       
+       width: 12rem;
+       border-radius: .5rem;
+       overflow: hidden;
+       text-align: center;
+   
+       opacity: 0;
+       transform: scale(.8);
+       transform-origin: top right;
+       
+       box-shadow: 0 .2rem .5rem #0004;
+       
+       transition: .2s;
+   }
+   
+   .export__file input:checked + .export__file-options {
+       opacity: 1;
+       transform: scale(1);
+       z-index: 100;
+   }
+   
+   .export__file .export__file-options label{
+       display: block;
+       width: 100%;
+       padding: .6rem 0;
+       background-color: #f2f2f2;
+       
+       display: flex;
+       justify-content: space-around;
+       align-items: center;
+   
+       transition: .2s ease-in-out;
+   }
+   
+   .export__file .export__file-options label:first-of-type{
+       padding: 1rem 0;
+       background-color: #86e49d !important;
+   }
+   
+   .export__file .export__file-options label:hover{
+       transform: scale(1.05);
+       background-color: #fff;
+       cursor: pointer;
+   }
+   
+   .export__file .export__file-options img{
+       width: 2rem;
+       height: auto;
+   }
+   
+   
+   
+   #addProsumerBtn {
+       margin: 1rem;
+       padding: 0.5rem 1rem;
+       background-color: #6c00bd;
+       color: white;
+       border: none;
+       border-radius: 5px;
+       cursor: pointer;
+   }
+   
+   #prosumerForm {
+       margin: 1rem;
+       padding: 1rem;
+       background-color: #fff;
+       border: 1px solid #ddd;
+       border-radius: 5px;
+   }
