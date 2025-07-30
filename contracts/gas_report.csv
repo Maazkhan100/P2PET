@@ -1,0 +1,7 @@
+Function,GasUsed
+constructor,2096098
+submitData (new slot),134188
+submitData (same slot),26175
+advancePhase,46367
+submitExecutionResult,108516
+verifyExecutionResult,46323
