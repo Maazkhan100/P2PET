@@ -63,7 +63,7 @@ def submit_data(role: int, energy: int, price_wei: int):
 if __name__ == "__main__":
     try:
         # register()
-        time.sleep(60)  # wait 10 seconds
+        time.sleep(60)
         submit_data(role=2, energy=100, price_wei=Web3.to_wei(0.05, "ether"))
     except Exception as e:
         print(f"Error occurred: {e}")
