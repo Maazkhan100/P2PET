@@ -1,36 +1,69 @@
 import json
 import os
-from web3 import Web3
 from eth_account import Account
 from dotenv import load_dotenv
 
-# Load .env variables
-load_dotenv()
+import subprocess
 
-KEYSTORE_PATH = os.getenv("KEYSTORE_PATH")
-ACCOUNT_PASSWORD = os.getenv("ACCOUNT_PASSWORD")
+def scp_distribution(
+    node_hosts,
+    files_to_send,
+    remote_base_dir="~/P2PET"
+):
+    """
+    Distributes given files to Pi nodes using scp and SSH host aliases.
 
-# Read and decrypt keystore
-with open(KEYSTORE_PATH, "r") as f:
-    keystore = json.load(f)
+    Args:
+        node_hosts (list): List of hostnames or aliases defined in ~/.ssh/config.
+        files_to_send (list): List of local file paths to copy.
+        remote_base_dir (str): Destination base directory on remote node.
+    """
+    failed_nodes = []
 
-private_key = Account.decrypt(keystore, ACCOUNT_PASSWORD)
-hex_key = private_key.hex()
+    for host in node_hosts:
+        print(f"Sending files to {host}...")
+        for local_file in files_to_send:
+            if "compiled" in local_file:
+                remote_path = f"{remote_base_dir}/compiled/"
+            elif "deployed" in local_file:
+                remote_path = f"{remote_base_dir}/deployed/"
+            else:
+                print(f"Skipping unrecognized path: {local_file}")
+                continue
 
-# Append PRIVATE_KEY to .env file if not already present
-env_path = ".env"
+            try:
+                subprocess.run(
+                    ["scp", local_file, f"{host}:{remote_path}"],
+                    check=True
+                )
+                print(f"Sent {local_file} to {host}:{remote_path}")
+            except subprocess.CalledProcessError as e:
+                print(f"Failed to send {local_file} to {host}: {e}")
+                failed_nodes.append(host)
 
-with open(env_path, "r") as f:
-    lines = f.readlines()
+    if failed_nodes:
+        print("\nThe following nodes failed:")
+        for host in failed_nodes:
+            print(f" - {host}")
 
-# Remove existing PRIVATE_KEY if already present
-lines = [line for line in lines if not line.startswith("PRIVATE_KEY=")]
+def get_private_key():
+    # Load environment variables
+    load_dotenv()
 
-# Add the new key
-lines.append(f"PRIVATE_KEY={hex_key}\n")
+    KEYSTORE_PATH = os.getenv("KEYSTORE_PATH")
+    ACCOUNT_PASSWORD = os.getenv("ACCOUNT_PASSWORD")
 
-# Write back
-with open(env_path, "w") as f:
-    f.writelines(lines)
+    if not KEYSTORE_PATH or not ACCOUNT_PASSWORD:
+        raise ValueError("Missing KEYSTORE_PATH or ACCOUNT_PASSWORD in environment variables.")
 
-print("Private key extracted and added to .env successfully.")
+    # Read keystore file
+    with open(KEYSTORE_PATH, "r") as f:
+        keystore = json.load(f)
+
+    # Decrypt private key
+    try:
+        private_key_bytes = Account.decrypt(keystore, ACCOUNT_PASSWORD)
+        private_key_hex = private_key_bytes.hex()
+        return private_key_hex
+    except Exception as e:
+        raise ValueError(f"Failed to decrypt private key: {str(e)}")

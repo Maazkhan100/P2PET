@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import json
 import os
 from web3 import Web3
@@ -6,18 +8,23 @@ from eth_account import Account
 from dotenv import load_dotenv
 from matching import Offer, greedy_double_auction
 from eth_utils import keccak
+from decrypt_key import get_private_key
 
 # Load .env
 load_dotenv()
 
-# Env vars
+# Load environment variables
 RPC_URL = os.getenv("RPC_URL")
-KEYSTORE_PATH = os.getenv("KEYSTORE_PATH")
-ACCOUNT_PASSWORD = os.getenv("ACCOUNT_PASSWORD")
 ABI_PATH = os.getenv("ABI_PATH")
 CONTRACT_ADDRESS_PATH = os.getenv("CONTRACT_ADDRESS_PATH")
 
-# Web3
+SCALING_FACTOR = 100  # Should match the one used for scaling on submission
+
+# Validate required env vars
+if not RPC_URL or not ABI_PATH or not CONTRACT_ADDRESS_PATH:
+    raise ValueError("Missing RPC_URL, ABI_PATH, or CONTRACT_ADDRESS_PATH in .env")
+
+# Web3 connection
 w3 = Web3(Web3.HTTPProvider(RPC_URL))
 w3.middleware_onion.inject(geth_poa_middleware, layer=0)
 
@@ -29,19 +36,15 @@ with open(ABI_PATH, "r") as f:
 with open(CONTRACT_ADDRESS_PATH, "r") as f:
     CONTRACT_ADDRESS = f.read().strip()
 
-contract = w3.eth.contract(address=CONTRACT_ADDRESS, abi=abi)
+# Contract instance
+contract = w3.eth.contract(address=Web3.to_checksum_address(CONTRACT_ADDRESS), abi=abi)
 
-# Load keystore and decrypt
-with open(KEYSTORE_PATH) as keyfile:
-    encrypted_key = json.load(keyfile)
-    private_key = Account.decrypt(encrypted_key, ACCOUNT_PASSWORD).hex()
-
-account = w3.eth.account.from_key(private_key)
+account = w3.eth.account.from_key(get_private_key())
 sender_address = account.address
 
 def fetch_all_participants():
     offers = []
-    for i in range(10):
+    for i in range(10): # make sure this loop number match to the participants in the smart contract
         try:
             data = contract.functions.participantsList(i).call()
             addr, role, energy, price = data
@@ -50,6 +53,11 @@ def fetch_all_participants():
                 continue
 
             role_str = "buyer" if role == 1 else "seller"
+
+            # Unscale energy and price (to get float values)
+            energy = energy / SCALING_FACTOR
+            price = price / SCALING_FACTOR
+
             offer = Offer(addr, role_str, energy, price)
             offers.append(offer)
         except Exception as e:
@@ -66,7 +74,7 @@ def send_result_hash_to_contract(result_hash_hex):
         'gasPrice': 0
     })
 
-    signed_tx = w3.eth.account.sign_transaction(tx, private_key=private_key)
+    signed_tx = w3.eth.account.sign_transaction(tx, get_private_key())
     tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
     return tx_hash.hex()
 

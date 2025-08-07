@@ -128,6 +128,7 @@ pip3 install pexpect --break-system-packages
 pip3 install eth_utils --break-system-packages
 pip3 install web3 flask flask-socketio pyserial --break-system-packages
 pip3 install py-solc-x --break-system-packages
+pip3 install web3
 
 ## ==================== Install some node modules using npm (for server related things like socket.io) ====================
 npm install express

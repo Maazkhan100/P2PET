@@ -21,7 +21,7 @@ contract EnergyTrade {
     ParticipantData[TOTAL_PARTICIPANTS] public participantsList;
 
     mapping(address => uint256) public addressToSlot;
-    uint256 public nextAvailableSlot = 0;
+    uint256 public nextAvailableSlot = 1;
     uint256 public currentRound = 1;
     Phase public currentPhase = Phase.DataSubmission;
 

@@ -95,8 +95,7 @@ for i in range(len(nodes_to_run)):
         f"--mine --miner.threads 1 --verbosity 5 --networkid 10 "
         f"--http --http.addr {ip_dict[node_number]} --http.port {rpc_port_num} "
         f"--http.api admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,istanbul "
-        f"--emitcheckpoints --allow-insecure-unlock "
-        f"--unlock {unlock_addr} --password data/password.txt "
+        f"--emitcheckpoints "
         f"--port {port_num} 2>>node{i}.log &"
     )
     else:
@@ -107,8 +106,7 @@ for i in range(len(nodes_to_run)):
         f"--http --http.addr 127.0.0.1 --http.port {rpc_port_num} "
         f"--http.api admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,istanbul "
         f"--http.corsdomain https://remix.ethereum.org "
-        f"--emitcheckpoints --allow-insecure-unlock "
-        f"--unlock {unlock_addr} --password data/password.txt "
+        f"--emitcheckpoints "
         f"--port {port_num} 2>>node{i}.log &"
     )
 
@@ -120,11 +118,11 @@ for i in range(len(nodes_to_run)):
 
     if is_raspberrypi:
         try:
-            execute_remotely(["cd ~", "cd block-chain-network", "./del_junk.sh", "./del_junk.sh"], "pi", ip_dict[node_number], pi_password)
-            command = f"scp -r node{i}/ pi@{ip_dict[node_number]}:/home/pi/block-chain-network"
+            execute_remotely(["cd ~", "cd P2PET", "./del_junk.sh", "./del_junk.sh"], "pi", ip_dict[node_number], pi_password)
+            command = f"scp -r node{i}/ pi@{ip_dict[node_number]}:/home/pi/P2PET"
             prompt_expected = f"pi@{ip_dict[node_number]}'s password: "
             scp_distribution(command, prompt_expected, pi_password)
-            execute_remotely(["cd ~", f"cd block-chain-network/node{i}", f"./startnode{i}.sh"], "pi", ip_dict[node_number], pi_password)
+            execute_remotely(["cd ~", f"cd P2PET/node{i}", f"./startnode{i}.sh"], "pi", ip_dict[node_number], pi_password)
         except:
             shellRun("./del_junk.sh")
             raise ConnectionError(f"Raspberry Pi node {node_number} is off/not accessible!")
